@@ -503,10 +503,10 @@ export function DocumentationDrawer({ isOpen, onClose }: DocumentationDrawerProp
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-hidden h-full">
           <Resizable horizontal className="h-full">
             {/* Component Props Section */}
-            <div className="h-full overflow-y-auto" data-pane-height="350">
+            <div className="h-full overflow-y-auto">
               <div className="sticky top-0 bg-gray-900/95 backdrop-blur-md border-b border-white/20 p-6 z-10">
                 <h3 className="text-xl font-semibold text-white mb-2">Component Props</h3>
                 <p className="text-white/70">
@@ -610,7 +610,7 @@ export function DocumentationDrawer({ isOpen, onClose }: DocumentationDrawerProp
             </div>
 
             {/* Data Attributes Section */}
-            <div className="h-full overflow-y-auto bg-gray-800/50" data-pane-height="450">
+            <div className="h-full overflow-y-auto bg-gray-800/50">
               <div className="sticky top-0 bg-gray-800/95 backdrop-blur-md border-b border-white/20 p-6 z-10">
                 <h3 className="text-xl font-semibold text-white mb-2">Panel Data Attributes</h3>
                 <p className="text-white/70">

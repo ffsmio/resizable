@@ -9,6 +9,9 @@ export function useScrollSnap() {
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
+      if (document.body.style.overflow === 'hidden') {
+        return;
+      }
       // Throttle scroll events
       const now = Date.now();
       if (now - lastScrollTimeRef.current < 100) {
