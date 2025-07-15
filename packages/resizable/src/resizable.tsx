@@ -106,7 +106,7 @@ export const Resizable = forwardRef<HTMLDivElement, ResizableProps>(({
       const currentWidth = typeof newWidths[index] === 'number' ? newWidths[index] as number : 0;
       const { minSize: paneMinSize, maxSize: paneMaxSize, hasMaxSize } = paneConfigs[index];
       
-      // Calculate maximum achievable size
+      // Calculate dynamic minimum size based on container constraints
       const paneElement = paneRefs.current[index];
       if (paneElement) {
         const containerSize = horizontal 
@@ -122,14 +122,23 @@ export const Resizable = forwardRef<HTMLDivElement, ResizableProps>(({
         for (let i = 0; i < childrenCount - 1; i++) { // Don't count last pane
           if (i !== index) {
             const paneSize = typeof newWidths[i] === 'number' ? newWidths[i] as number : 0;
-            totalOtherPanesSize += paneSize;
+            // If pane has no size, use its minSize
+            totalOtherPanesSize += paneSize || paneConfigs[i].minSize;
           }
         }
         
-        // Min size of last pane (if exists)
-        const lastPaneMinSize = paneConfigs[childrenCount - 1].minSize || 0;
+        // Max size of last pane (if exists and has maxSize)
+        const lastPaneIndex = childrenCount - 1;
+        const lastPaneMaxSize = paneConfigs[lastPaneIndex].hasMaxSize ? paneConfigs[lastPaneIndex].maxSize : 0;
+        
+        // Dynamic min size = container size - resizers - size of other panes - max size of last pane
+        const dynamicMinSize = containerSize - totalResizerSize - totalOtherPanesSize - lastPaneMaxSize;
+        
+        // Take max between dynamic min size and config min size
+        const effectiveMinSize = Math.max(paneMinSize, dynamicMinSize);
         
         // Max achievable size = container size - resizers - size of other panes - min size of last pane
+        const lastPaneMinSize = paneConfigs[lastPaneIndex].minSize || 0;
         const maxPossibleSize = containerSize - totalResizerSize - totalOtherPanesSize - lastPaneMinSize;
         
         // Limit effective max size
@@ -138,7 +147,7 @@ export const Resizable = forwardRef<HTMLDivElement, ResizableProps>(({
           : maxPossibleSize;
         
         const newSize = Math.max(
-          paneMinSize, 
+          effectiveMinSize, 
           Math.min(effectiveMaxSize, currentWidth + delta)
         );
         
