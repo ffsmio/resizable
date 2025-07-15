@@ -1,0 +1,48 @@
+{
+  "name": "@ffsm/resizable",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A React component library for resizable panels with various grip styles",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "yarn clean && rollup -c",
+    "dev": "rollup -c -w",
+    "clean": "rimraf dist",
+    "test": "jest"
+  },
+  "keywords": [
+    "react",
+    "resizable",
+    "panels",
+    "ui",
+    "component"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.4",
+    "@types/react": "^18.0.0",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.45.0",
+    "rollup-plugin-dts": "^6.2.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "typescript": "^5.0.0"
+  }
+}
