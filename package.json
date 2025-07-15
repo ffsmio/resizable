@@ -7,11 +7,14 @@
   ],
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "yarn build:packages && next build",
     "build:packages": "yarn workspace @ffsm/resizable build",
     "clean": "yarn workspace @ffsm/resizable clean",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d out",
+    "vercel-build": "yarn install -W && yarn build:packages && yarn build"
   },
   "dependencies": {
     "@ffsm/resizable": "file:./packages/resizable",
@@ -24,6 +27,9 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.4",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -31,6 +37,11 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "eslint": "^9",
     "eslint-config-next": "15.4.1",
+    "gh-pages": "^6.3.0",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.45.1",
+    "rollup-plugin-dts": "^6.2.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
