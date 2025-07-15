@@ -14,7 +14,8 @@
     "lint": "next lint",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d out",
-    "vercel-build": "yarn install -W && yarn build:packages && yarn build"
+    "vercel-build": "yarn install -W && yarn build:packages && yarn build",
+    "netlify-build": "yarn install -W && yarn build:packages && yarn build"
   },
   "dependencies": {
     "@ffsm/resizable": "file:./packages/resizable",
