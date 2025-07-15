@@ -47,6 +47,7 @@ function App() {
 - `grip?`: GripVariant - Grip style (default: 'lines')
 - `settings?`: ResizerSettings - Customization options
 - `cursor?`: string - Custom cursor style for resizer
+- `onResize?`: (sizes: number[], index: number) => void - Callback when user resizes panels
 
 ## WIP (Work In Progress)
 
@@ -55,7 +56,6 @@ function App() {
 The following props are planned to be implemented in future versions:
 
 #### **1. Callback Props**
-- `onResize?: (sizes: number[], index: number) => void` - Callback when user resizes panels
 - `onCollapse?: (index: number) => void` - Callback when panel collapses
 - `onExpand?: (index: number) => void` - Callback when panel expands
 

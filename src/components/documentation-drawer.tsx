@@ -297,6 +297,69 @@ const propDocumentation: PropDocumentation[] = [
 </Resizable>`
   },
   {
+    name: 'onResize',
+    type: '(sizes: number[], index: number) => void',
+    description: 'Callback function called when user resizes panels. Receives the current sizes of all panels and the index of the panel being resized. Sizes are in pixels and represent widths for vertical layout or heights for horizontal layout.',
+    required: false,
+    example: `{/* Basic usage */}
+<Resizable 
+  onResize={(sizes, index) => {
+    console.log('Panel', index, 'resized');
+    console.log('All panel sizes:', sizes);
+  }}
+>
+  <div>Panel 1</div>
+  <div>Panel 2</div>
+  <div>Panel 3</div>
+</Resizable>
+
+{/* Save sizes to localStorage */}
+<Resizable 
+  onResize={(sizes, index) => {
+    localStorage.setItem('panelSizes', JSON.stringify(sizes));
+    console.log(\`Panel \${index} resized to \${sizes[index]}px\`);
+  }}
+>
+  <div>Panel 1</div>
+  <div>Panel 2</div>
+</Resizable>
+
+{/* Update state for controlled behavior */}
+function MyComponent() {
+  const [panelSizes, setPanelSizes] = useState<number[]>([]);
+  
+  return (
+    <Resizable 
+      onResize={(sizes, index) => {
+        setPanelSizes(sizes);
+        // Perform validation or side effects
+        if (sizes[index] < 100) {
+          console.warn('Panel too small!');
+        }
+      }}
+    >
+      <div>Current size: {panelSizes[0]}px</div>
+      <div>Current size: {panelSizes[1]}px</div>
+    </Resizable>
+  );
+}
+
+{/* Track resize events */}
+<Resizable 
+  onResize={(sizes, index) => {
+    // Send analytics event
+    analytics.track('panel_resized', {
+      panelIndex: index,
+      newSize: sizes[index],
+      allSizes: sizes
+    });
+  }}
+>
+  <div>Panel 1</div>
+  <div>Panel 2</div>
+</Resizable>`
+  },
+  {
     name: '...htmlProps',
     type: 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>',
     description: 'All standard HTML div attributes are supported and will be passed through to the container element. This includes id, style, onClick, onMouseOver, data-* attributes, and more.',

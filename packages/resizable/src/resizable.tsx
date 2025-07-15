@@ -15,6 +15,7 @@ export interface ResizableProps extends DetailedHTMLProps<HTMLAttributes<HTMLDiv
   grip?: GripVariant;
   settings?: ResizerSettings;
   cursor?: string;
+  onResize?: (sizes: number[], index: number) => void;
 }
 
 export const Resizable = forwardRef<HTMLDivElement, ResizableProps>(({
@@ -27,6 +28,7 @@ export const Resizable = forwardRef<HTMLDivElement, ResizableProps>(({
   grip = 'lines',
   settings,
   cursor,
+  onResize,
   ...htmlProps
 }, ref) => {
   const childrenArray = Children.toArray(children);
@@ -153,7 +155,22 @@ export const Resizable = forwardRef<HTMLDivElement, ResizableProps>(({
       
       return newWidths;
     });
-  }, [paneConfigs, isResizing, childrenCount, childrenArray, horizontal, settings?.size]);
+    
+    // Call onResize callback if provided
+    if (onResize) {
+      // Get current sizes of all panes
+      const currentSizes: number[] = [];
+      childrenArray.forEach((_, i) => {
+        const paneElement = paneRefs.current[i];
+        if (paneElement) {
+          currentSizes[i] = horizontal ? paneElement.offsetHeight : paneElement.offsetWidth;
+        } else {
+          currentSizes[i] = typeof widths[i] === 'number' ? widths[i] as number : 0;
+        }
+      });
+      onResize(currentSizes, index);
+    }
+  }, [paneConfigs, isResizing, childrenCount, childrenArray, horizontal, settings?.size, onResize, widths]);
 
   // If only 1 element, no resizer needed
   if (childrenCount <= 1) {
