@@ -379,62 +379,53 @@ function MyComponent() {
 // Additional documentation for data attributes
 const dataAttributeDocumentation: PropDocumentation[] = [
   {
-    name: 'data-pane-width',
+    name: 'data-pane-size',
     type: 'string | number',
-    description: 'Set initial width for a specific panel in vertical layout. Applied to individual panel elements.',
+    description: 'Set initial size for a specific panel. For vertical layout this sets width, for horizontal layout this sets height. Applied to individual panel elements.',
     required: false,
-    example: `<Resizable>
-  <div data-pane-width="300">300px panel</div>
+    example: `{/* Vertical layout - sets width */}
+<Resizable>
+  <div data-pane-size="300">300px wide panel</div>
+  <div>Auto-sized panel</div>
+</Resizable>
+
+{/* Horizontal layout - sets height */}
+<Resizable horizontal>
+  <div data-pane-size="200">200px high panel</div>
   <div>Auto-sized panel</div>
 </Resizable>`
   },
   {
-    name: 'data-pane-height',
+    name: 'data-pane-minsize',
     type: 'string | number',
-    description: 'Set initial height for a specific panel in horizontal layout. Applied to individual panel elements.',
+    description: 'Set minimum size for a specific panel. For vertical layout this sets minimum width, for horizontal layout this sets minimum height. Overrides global minWidth for this panel.',
     required: false,
-    example: `<Resizable horizontal>
-  <div data-pane-height="200">200px panel</div>
-  <div>Auto-sized panel</div>
-</Resizable>`
-  },
-  {
-    name: 'data-pane-minwidth',
-    type: 'string | number',
-    description: 'Set minimum width for a specific panel in vertical layout. Overrides global minWidth for this panel.',
-    required: false,
-    example: `<Resizable>
-  <div data-pane-minwidth="100">Min 100px panel</div>
+    example: `{/* Vertical layout - minimum width */}
+<Resizable>
+  <div data-pane-minsize="100">Min 100px wide panel</div>
+  <div>Regular panel</div>
+</Resizable>
+
+{/* Horizontal layout - minimum height */}
+<Resizable horizontal>
+  <div data-pane-minsize="150">Min 150px high panel</div>
   <div>Regular panel</div>
 </Resizable>`
   },
   {
-    name: 'data-pane-minheight',
+    name: 'data-pane-maxsize',
     type: 'string | number',
-    description: 'Set minimum height for a specific panel in horizontal layout. Overrides global minWidth for this panel.',
+    description: 'Set maximum size for a specific panel. For vertical layout this sets maximum width, for horizontal layout this sets maximum height. Overrides global maxWidth for this panel.',
     required: false,
-    example: `<Resizable horizontal>
-  <div data-pane-minheight="150">Min 150px panel</div>
+    example: `{/* Vertical layout - maximum width */}
+<Resizable>
+  <div data-pane-maxsize="500">Max 500px wide panel</div>
   <div>Regular panel</div>
-</Resizable>`
-  },
-  {
-    name: 'data-pane-maxwidth',
-    type: 'string | number',
-    description: 'Set maximum width for a specific panel in vertical layout. Overrides global maxWidth for this panel.',
-    required: false,
-    example: `<Resizable>
-  <div data-pane-maxwidth="500">Max 500px panel</div>
-  <div>Regular panel</div>
-</Resizable>`
-  },
-  {
-    name: 'data-pane-maxheight',
-    type: 'string | number',
-    description: 'Set maximum height for a specific panel in horizontal layout. Overrides global maxWidth for this panel.',
-    required: false,
-    example: `<Resizable horizontal>
-  <div data-pane-maxheight="400">Max 400px panel</div>
+</Resizable>
+
+{/* Horizontal layout - maximum height */}
+<Resizable horizontal>
+  <div data-pane-maxsize="400">Max 400px high panel</div>
   <div>Regular panel</div>
 </Resizable>`
   }

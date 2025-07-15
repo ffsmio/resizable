@@ -49,7 +49,7 @@ export const Resizable = forwardRef<HTMLDivElement, ResizableProps>(({
 
     // Only extract config if child is ReactElement
     if (typeof child === 'object' && child !== null && 'props' in child) {
-      return extractConfig(child as ReactElement, defaultConfig, horizontal);
+      return extractConfig(child as ReactElement, defaultConfig);
     }
 
     return defaultConfig;
