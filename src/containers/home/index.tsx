@@ -6,6 +6,7 @@ import { Hero } from './hero';
 import { Features } from './features';
 import { Wrapper } from './wrapper';
 import { DemosClient } from './demos-client';
+import { TestCases } from './testcases';
 
 export default function HomeContainer() {
   return (
@@ -25,6 +26,9 @@ export default function HomeContainer() {
 
         {/* Advanced Demos Section */}
         <DemosClient />
+
+        {/* Test Cases Section */}
+        <TestCases />
 
         {/* Footer */}
         <Footer />

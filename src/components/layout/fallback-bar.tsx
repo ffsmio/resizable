@@ -54,7 +54,7 @@ export function FallbackBar({
     };
   }, [showSettings]);
 
-  const sections = ['hero', 'demo', 'demos', 'features'];
+  const sections = ['hero', 'demo', 'demos', 'features', 'testcases'];
   
   const scrollToSection = (direction: 'up' | 'down') => {
     const currentScrollY = window.scrollY;

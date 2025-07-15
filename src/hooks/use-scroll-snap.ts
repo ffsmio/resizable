@@ -66,7 +66,7 @@ export function useScrollSnap() {
         let targetSectionIndex = currentSectionIndex;
         if (deltaY > 0) {
           // Scroll down
-          targetSectionIndex = Math.min(currentSectionIndex + 1, 4); // Assuming 5 sections (0-4)
+          targetSectionIndex = Math.min(currentSectionIndex + 1, 5); // Assuming 6 sections (0-5)
         } else {
           // Scroll up  
           targetSectionIndex = Math.max(currentSectionIndex - 1, 0);
@@ -96,7 +96,7 @@ export function useScrollSnap() {
           const currentScrollY = window.scrollY;
           const viewportHeight = window.innerHeight;
           const currentSectionIndex = Math.round(currentScrollY / viewportHeight);
-          const targetSectionIndex = Math.min(currentSectionIndex + 1, 4);
+          const targetSectionIndex = Math.min(currentSectionIndex + 1, 5);
           const targetY = targetSectionIndex * viewportHeight;
           
           isScrollingRef.current = true;

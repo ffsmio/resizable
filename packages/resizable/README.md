@@ -188,6 +188,98 @@ function App() {
 - ⏳ `maxScrollWidth?`: number - Maximum scrollable width
 - ⏳ `maxScrollHeight?`: number - Maximum scrollable height
 
+### 🔄 **Planned Component: Container** (Future Release)
+
+A component that provides edge-based resizing functionality:
+
+```tsx
+import { Container } from '@ffsm/resizable';
+
+function App() {
+  return (
+    <Container 
+      edges={['top', 'right', 'bottom', 'left']}
+      minWidth={200}
+      maxWidth={800}
+      onResize={(dimensions) => console.log(dimensions)}
+    >
+      <div>Resizable content by edges</div>
+    </Container>
+  );
+}
+```
+
+#### **Container Features:**
+- ⏳ **Edge-based resizing**: Resize from any edge (top, right, bottom, left)
+- ⏳ **Corner resizing**: Resize from corners for width and height simultaneously
+- ⏳ **Size constraints**: Min/max width and height support
+- ⏳ **Aspect ratio**: Maintain aspect ratio during resize
+- ⏳ **Resize handles**: Customizable resize handles with different styles
+
+#### **Container Props:**
+- ⏳ `edges?`: Array<'top' | 'right' | 'bottom' | 'left'> - Enabled resize edges
+- ⏳ `corners?`: boolean - Enable corner resizing
+- ⏳ `minWidth?`: number - Minimum width constraint
+- ⏳ `maxWidth?`: number - Maximum width constraint
+- ⏳ `minHeight?`: number - Minimum height constraint
+- ⏳ `maxHeight?`: number - Maximum height constraint
+- ⏳ `aspectRatio?`: number - Maintain aspect ratio
+- ⏳ `onResize?`: (dimensions: {width: number, height: number}) => void
+
+### 🔄 **Planned Component: Windows** (Future Release)
+
+A window management system that provides overlay windows on top of UI:
+
+```tsx
+import { Windows, WindowPanel } from '@ffsm/resizable';
+
+function App() {
+  return (
+    <Windows>
+      <WindowPanel 
+        id="window1" 
+        title="My Window"
+        initialPosition={{ x: 100, y: 100 }}
+        initialSize={{ width: 400, height: 300 }}
+        resizable
+        draggable
+      >
+        <div>Window content</div>
+      </WindowPanel>
+    </Windows>
+  );
+}
+```
+
+#### **Windows Features:**
+- ⏳ **Overlay system**: Windows float over existing UI
+- ⏳ **Drag and drop**: Move windows by dragging title bar
+- ⏳ **Resize support**: Integration with Container component for edge resizing
+- ⏳ **Z-index management**: Automatic layering and focus management
+- ⏳ **Window controls**: Minimize, maximize, close buttons
+- ⏳ **Snapping**: Snap to edges and other windows
+- ⏳ **Multi-window**: Support for multiple windows simultaneously
+
+#### **Windows Props:**
+- ⏳ `children`: ReactNode - Window components
+- ⏳ `zIndexBase?`: number - Base z-index for window layering
+- ⏳ `snapDistance?`: number - Distance for edge snapping
+- ⏳ `onWindowFocus?`: (windowId: string) => void
+
+#### **WindowPanel Props:**
+- ⏳ `id`: string - Unique window identifier
+- ⏳ `title?`: string - Window title
+- ⏳ `initialPosition?`: {x: number, y: number} - Initial window position
+- ⏳ `initialSize?`: {width: number, height: number} - Initial window size
+- ⏳ `resizable?`: boolean - Enable window resizing
+- ⏳ `draggable?`: boolean - Enable window dragging
+- ⏳ `closable?`: boolean - Show close button
+- ⏳ `minimizable?`: boolean - Show minimize button
+- ⏳ `maximizable?`: boolean - Show maximize button
+- ⏳ `onClose?`: () => void - Close callback
+- ⏳ `onMinimize?`: () => void - Minimize callback
+- ⏳ `onMaximize?`: () => void - Maximize callback
+
 ## Legend
 - ✅ **Available**: Feature is implemented and ready to use
 - ⏳ **Work In Progress**: Feature is planned for future releases
