@@ -185,7 +185,7 @@ export const Resizable = forwardRef<HTMLDivElement, ResizableProps>(({
     <div ref={ref} className={className} style={horizontal ? panelsContainerStyles.horizontal : panelsContainerStyles.vertical} {...htmlProps}>
       {childrenArray.map((child, index) => {
         const isLast = index === childrenArray.length - 1;
-        const { hasMaxSize, hasSize, minSize: paneMinSize } = paneConfigs[index];
+        const { hasMaxSize, hasSize, minSize: paneMinSize, maxSize: paneMaxSize } = paneConfigs[index];
         
         // Elements without size will flex grow 1, unless already resized
         // Last pane always flex when resizing or when size is empty string
@@ -215,11 +215,13 @@ export const Resizable = forwardRef<HTMLDivElement, ResizableProps>(({
                 ...(horizontal 
                   ? {
                       height: shouldFlexGrow ? undefined : (typeof widths[index] === 'string' ? widths[index] : widths[index]),
-                      minHeight: paneMinSize
+                      minHeight: paneMinSize,
+                      ...(hasMaxSize && { maxHeight: paneMaxSize })
                     }
                   : {
                       width: shouldFlexGrow ? undefined : (typeof widths[index] === 'string' ? widths[index] : widths[index]),
-                      minWidth: paneMinSize
+                      minWidth: paneMinSize,
+                      ...(hasMaxSize && { maxWidth: paneMaxSize })
                     })
               }}
             >
