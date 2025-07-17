@@ -11,6 +11,21 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./vertical": {
+      "import": "./dist/vertical.esm.js",
+      "require": "./dist/vertical.js",
+      "types": "./dist/vertical.d.ts"
+    },
+    "./horizontal": {
+      "import": "./dist/horizontal.esm.js",
+      "require": "./dist/horizontal.js",
+      "types": "./dist/horizontal.d.ts"
+    },
+    "./resizable": {
+      "import": "./dist/resizable.esm.js",
+      "require": "./dist/resizable.js",
+      "types": "./dist/resizable.d.ts"
     }
   },
   "files": [

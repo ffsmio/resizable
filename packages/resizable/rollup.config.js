@@ -6,38 +6,58 @@ import dts from 'rollup-plugin-dts';
 import { defineConfig } from 'rollup';
 
 export default defineConfig([
+  // Main build configuration
   {
-    input: 'src/index.ts',
+    input: {
+      index: 'src/index.ts',
+      vertical: 'src/vertical.tsx',
+      horizontal: 'src/horizontal.tsx',
+      resizable: 'src/resizable.tsx',
+    },
     output: [
       {
-        file: 'dist/index.js',
+        dir: 'dist',
         format: 'cjs',
         sourcemap: true,
+        entryFileNames: '[name].js',
+        chunkFileNames: '[name].js',
       },
       {
-        file: 'dist/index.esm.js',
+        dir: 'dist',
         format: 'esm',
         sourcemap: true,
+        entryFileNames: '[name].esm.js',
+        chunkFileNames: '[name].esm.js',
       },
     ],
     plugins: [
       peerDepsExternal(),
       resolve({
         browser: true,
+        preferBuiltins: false,
       }),
       commonjs(),
       typescript({
         tsconfig: './tsconfig.json',
         exclude: ['**/*.test.ts', '**/*.test.tsx'],
+        declaration: false,
+        outDir: null,
       }),
     ],
     external: ['react', 'react-dom'],
   },
+  // Type definitions
   {
-    input: 'src/index.ts',
+    input: {
+      index: 'src/index.ts',
+      vertical: 'src/vertical.tsx',
+      horizontal: 'src/horizontal.tsx',
+      resizable: 'src/resizable.tsx',
+    },
     output: {
-      file: 'dist/index.d.ts',
+      dir: 'dist',
       format: 'esm',
+      entryFileNames: '[name].d.ts',
     },
     plugins: [dts()],
   },
